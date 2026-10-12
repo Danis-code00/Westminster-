@@ -18,6 +18,7 @@ public class Product {
         return id;
     }
 
+//    Verified getter removal drops the field from JSON
     public String getName() {
         return name;
     }
