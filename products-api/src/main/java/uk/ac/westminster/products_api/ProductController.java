@@ -1,13 +1,10 @@
 package uk.ac.westminster.products_api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.PrimitiveIterator;
+
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -23,5 +20,22 @@ public class ProductController {
     public List<Product> getAllProducts(){
         return productServices.getAllProducts();
     }
+
+    @GetMapping("/products/{id}")
+    public Product getProductById(@PathVariable Long id){
+        return productServices.getProductById(id).orElse(null);
+    }
+
+    @PostMapping("/products")
+    public Product requestProduct(@RequestBody Product product){
+        return productServices.addProduct(product);
+    }
+    @DeleteMapping("/products/{id}")
+    public boolean deleteProduct(@PathVariable Long id){
+        return productServices.deleteProduct(id);
+    }
+
+    //404 experiment when Get /produt/99 was excuted it gave the example value
+
 
 }
