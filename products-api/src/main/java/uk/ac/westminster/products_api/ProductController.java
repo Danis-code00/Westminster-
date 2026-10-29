@@ -30,6 +30,7 @@ public class ProductController {
     public Product requestProduct(@RequestBody Product product){
         return productServices.addProduct(product);
     }
+
     @DeleteMapping("/products/{id}")
     public boolean deleteProduct(@PathVariable Long id){
         return productServices.deleteProduct(id);
@@ -37,5 +38,8 @@ public class ProductController {
 
     //404 experiment when Get /produt/99 was excuted it gave the example value
 
-
+    @GetMapping("/products/search")
+    public List<Product> search(@RequestParam String name){
+        return productServices.findByName(name);
+    }
 }
